@@ -29,7 +29,7 @@ To run the project locally, follow these steps:
 
 The project structure follows the conventions of a typical Next.js application:
 
-- `/pages`: Contains the Next.js pages, which represent different routes of the application.
+- `/app`: Contains the Next.js app, which represent different routes of the application.
 - `/components`: Includes reusable React components used throughout the application.
 - `/api`: Contains serverless functions or API routes used for fetching data from the Unsplash API.
 - `/styles`: Holds CSS or SCSS files for styling the components.
