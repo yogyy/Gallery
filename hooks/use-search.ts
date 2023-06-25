@@ -24,7 +24,7 @@ const useImageSearch = () => {
         const res = await axios.get(`/api/search?query=${query}`);
         const images: UnsplashImage[] = await res.data;
         setData(images);
-        console.log(data?.length);
+        console.log(data);
       }
     } catch (error) {
       console.error(error);
