@@ -17,7 +17,7 @@ export default async function Page() {
   const width = Math.min(500, image.width);
   const height = (width / image.width) * image.height;
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full px-2 mx-auto md:px-0">
       <div className="flex flex-col items-center max-w-5xl gap-3 py-4">
         <NavMenu />
         <p className="text-blue-500 hover:underline">
@@ -26,14 +26,12 @@ export default async function Page() {
         </p>
       </div>
 
-      <Suspense fallback={<Loading className="w-screen h-screen" />}>
-        <NextImage
-          src={image.urls.regular}
-          alt={image.description || image.alt_description}
-          width={width}
-          height={height}
-        />
-      </Suspense>
+      <NextImage
+        src={image.urls.regular}
+        alt={image.description || image.alt_description}
+        width={width}
+        height={height}
+      />
     </div>
   );
 }

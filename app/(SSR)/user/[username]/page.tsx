@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { username } }: PageProps): Pro
   const user = await getUser(username);
 
   return {
-    title: `${user.first_name} ${user?.last_name} ` || `${user.username} NextJS 13.4 Image Gallery`,
+    title: `${user.name} ` || `${user.username} NextJS 13.4 Image Gallery`,
   };
 }
 export default async function Page({ params: { username } }: PageProps) {
@@ -33,7 +33,12 @@ export default async function Page({ params: { username } }: PageProps) {
       <div className="w-full max-w-5xl">
         <div className="flex">
           <div className="w-20 h-20">
-            <Image width={80} height={80} src={user.profile_image.large} alt={user.bio} />
+            <Image
+              width={80}
+              height={80}
+              src={user.profile_image.large}
+              alt={user.bio || user.username}
+            />
           </div>
           <h1>{user.username}</h1>
         </div>

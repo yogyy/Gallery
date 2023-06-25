@@ -29,7 +29,7 @@ export function SheetDemo() {
       >
         <SheetHeader>
           <SheetTitle className="flex w-full text-base text-white">
-            <AlignLeft className="mx-2.5" /> <span className="text-green-600">Nusantara</span>
+            <AlignLeft className="mx-2.5" /> <span className="text-green-600">Gallery</span>
           </SheetTitle>
           <hr />
         </SheetHeader>

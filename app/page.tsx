@@ -9,7 +9,7 @@ export default async function Home() {
   // );
   // const images: UnsplashImage[] = await res.json();
   return (
-    <div className="flex flex-col items-center w-full h-screen text-white">
+    <div className="flex flex-col items-center w-full h-screen min-h-full text-white">
       <div className="relative flex flex-col items-center justify-around h-full">
         <h1 className="font-serif text-2xl font-semibold">Welcome to Gallery!!</h1>
         <Marquee speed={30}>

@@ -1,7 +1,5 @@
 'use client';
 
-import { UnsplashImage } from '@/app/models/unsplash-image';
-import Loading from '@/components/client/loader';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,20 +12,20 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
-import { useState } from 'react';
+import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { NextImage } from '@/components/client/NextImage';
-
-const formSchema = z.object({
-  query: z.string().nonempty({ message: 'Query must not empty' }),
-});
+import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useImageSearch, formSchema } from '@/hooks/use-search';
+import UnsplashGrid from '@/components/client/unsplash-grid';
 
 export default function SearchPage() {
-  const [searchResults, setsearchResults] = useState<UnsplashImage[] | null>(null);
-  const [searchResultsLoading, setsearchResultsLoading] = useState(false);
-  const [searchResultsError, setsearchResultsError] = useState(false);
+  const { data, loading, error, searchImage } = useImageSearch();
+
+  const inputRef = React.useRef<HTMLElement>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,28 +34,27 @@ export default function SearchPage() {
     },
   });
 
-  async function searchImage(e: z.infer<typeof formSchema>) {
-    try {
-      const query = e.query;
-      formSchema.parse({ query });
-
-      if (query) {
-        setsearchResults(null);
-        setsearchResultsError(false);
-        setsearchResultsLoading(true);
-        const res = await axios.get(`/api/search?query=${query}`);
-        const images: UnsplashImage[] = await res.data;
-        setsearchResults(images);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setsearchResultsLoading(false);
+  const focusInput = () => {
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
     }
-  }
+  };
+
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        focusInput();
+      }
+    };
+
+    document.addEventListener('keydown', down);
+
+    return () => document.removeEventListener('keydown', down);
+  }, []);
 
   return (
-    <div className="w-full h-full min-h-screen mx-3 lg:mx-0">
+    <div className="w-full h-full max-w-5xl min-h-screen mx-3 lg:mx-0">
       <div className="w-full">
         <Form {...form}>
           <form
@@ -70,40 +67,41 @@ export default function SearchPage() {
               render={({ field }) => (
                 <FormItem className="w-6/12 ">
                   <FormLabel>Search Query</FormLabel>
-                  <FormControl>
-                    <Input placeholder="query ..." {...field} />
+                  <FormControl ref={inputRef}>
+                    <Input disabled={loading} placeholder="query ..." {...field} />
                   </FormControl>
                   <FormDescription>Your search results will appear below.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={searchResultsLoading}>
-              Submit
+            <Button variant="secondary" type="submit" className="w-[70px]" disabled={loading}>
+              {loading ? <Loader2 className="w-4 animate-spin" /> : 'Search'}
             </Button>
           </form>
         </Form>
       </div>
-      <div className="flex flex-col items-center">
-        {searchResultsLoading && <Loading />}
-        {searchResultsError && <p>someting error</p>}
-        {searchResults?.length === 0 && <p>nothing found</p>}
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-          {searchResults && (
+      <div className="relative flex flex-col items-center justify-center">
+        <div className="relative grid w-full grid-cols-2 md:grid-cols-3 gap-2.5">
+          {loading ? (
             <>
-              {searchResults.map(image => (
-                <NextImage
-                  key={image.alt_description + image.height}
-                  src={image.urls.regular}
-                  width={image.width / 8}
-                  height={image.height / 8}
-                  alt={image.alt_description}
-                  className="object-cover m-0.5 rounded"
-                  onClick={() => console.log(image)}
-                />
+              {[...Array(3)].map((_, index) => (
+                <Skeleton key={index} className="min-w-full rounded h-80 m-0.5 shrink" />
               ))}
             </>
+          ) : (
+            data && (
+              <>
+                <UnsplashGrid data={data.slice(0, Math.ceil(data.length / 3))} />
+                <UnsplashGrid
+                  data={data.slice(Math.ceil(data.length / 3), Math.ceil((2 * data.length) / 3))}
+                />
+                <UnsplashGrid data={data.slice(Math.ceil((2 * data.length) / 3))} />
+              </>
+            )
           )}
+          {error && <p>someting error</p>}
+          {data?.length === 0 && <p>nothing found, {error}</p>}
         </div>
       </div>
     </div>

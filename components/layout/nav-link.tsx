@@ -7,16 +7,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 export const navbar = [
   {
-    name: 'Home',
-    link: '/',
+    name: 'Image',
+    link: '/image',
   },
   {
-    // name: name.kecamatan,
-    name: 'Galeri',
-    link: '/gallery',
-  },
-  {
-    // name: name.kecamatan,
     name: 'Search',
     link: '/search',
   },
@@ -26,12 +20,12 @@ const NavLink = () => {
   const arrsplit = pathname!.split('/');
   const baseRoute = '/' + arrsplit[1];
   return (
-    <ul className={'justify-center flex-grow hidden sm:flex'}>
+    <ul className={'items-center flex-grow hidden sm:flex'}>
       {navbar.map(nav => (
         <li key={nav.link}>
           <Link
             className={cn(
-              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex justify-center',
+              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex justify-center transition-colors hover:text-slate-300/80 text-slate-300/60',
               pathname && baseRoute === nav.link ? 'text-sky-600' : ''
             )}
             href={nav.link}

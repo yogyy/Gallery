@@ -9,7 +9,7 @@ import { Separator } from '../ui/separator';
 const components: { title: string; href: string; description: string }[] = [
   {
     title: 'Static',
-    href: '/gallery',
+    href: '/image',
     description: 'Fetching data static.',
   },
   {

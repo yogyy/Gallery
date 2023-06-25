@@ -81,7 +81,4 @@
     background-color: #121212;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
-  .maps .Singkil:hover {
-    @apply fill-green-900/80;
-  }
 }
