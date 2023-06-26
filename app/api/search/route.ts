@@ -8,7 +8,10 @@ export async function GET(request: Request) {
   if (!query) return NextResponse.json({ error: 'No query provided' }, { status: 400 });
 
   const res = await fetch(
-    `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.UNSPLASH_KEY}`
+    `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.UNSPLASH_KEY}`,
+    {
+      cache: 'force-cache',
+    }
   );
   const { results }: UnsplashSearchResponse = await res.json();
 
