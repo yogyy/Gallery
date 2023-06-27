@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 const allowedOrigins =
   process.env.NODE_ENV === 'production'
-    ? ['https://your.domain.com']
+    ? ['https://gallery-yy.vercel.app']
     : ['http://localhost:3000', 'http://localhost:8080'];
 
 export function middleware(request: Request) {
