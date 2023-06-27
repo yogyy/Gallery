@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Navbar from './navbar';
 import { MyContextProvider } from '@/components/client/context';
 import { Toaster } from '@/components/client/toaster';
+import Footer from '@/components/layout/footer';
 
 const inter = Inter({ subsets: ['latin'], fallback: ['arial'] });
 
@@ -16,10 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`relative ${inter.className}`}>
         <Navbar />
-        <MyContextProvider>
-          <main>{children}</main>
-        </MyContextProvider>
+        <main>{children}</main>
         <Toaster />
+        <Footer />
       </body>
     </html>
   );

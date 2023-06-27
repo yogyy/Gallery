@@ -1,6 +1,4 @@
 import { UnsplashImage } from '../models/unsplash-image';
-import { Suspense } from 'react';
-import Loading from '@/components/client/loader';
 import Link from 'next/link';
 import { NavMenu } from '@/components/client/nav-menu';
 import { NextImage } from '@/components/client/NextImage';

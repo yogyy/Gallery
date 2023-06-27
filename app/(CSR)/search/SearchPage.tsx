@@ -41,6 +41,10 @@ export default function SearchPage() {
   };
 
   React.useEffect(() => {
+    console.log('function jalan lagi');
+  }, [searchImage]);
+
+  React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -55,42 +59,54 @@ export default function SearchPage() {
 
   return (
     <div className="w-full h-full max-w-5xl min-h-screen mx-3 lg:mx-0">
-      <div className="w-full">
+      <div className="w-auto">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(searchImage)}
-            className="flex justify-center gap-3 space-y-8"
+            className="relative flex flex-wrap justify-center w-full space-x-3 space-y-8"
           >
             <FormField
               control={form.control}
               name="query"
               render={({ field }) => (
-                <FormItem className="w-6/12 ">
-                  <FormLabel>Search Query</FormLabel>
+                <FormItem className="w-4/6">
+                  <FormLabel className="w-full font-semibold text-slate-400">
+                    Search Image
+                  </FormLabel>
                   <FormControl ref={inputRef}>
-                    <Input disabled={loading} placeholder="query ..." {...field} />
+                    <Input
+                      className="focus-visible:shadow-neon"
+                      disabled={loading}
+                      placeholder="query ..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>Your search results will appear below.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button variant="secondary" type="submit" className="w-[70px]" disabled={loading}>
+            <Button
+              variant="outline"
+              type="submit"
+              className="w-[70px] hover:bg-foreground hover:text-white active:shadow-neon"
+              disabled={loading}
+            >
               {loading ? <Loader2 className="w-4 animate-spin" /> : 'Search'}
             </Button>
           </form>
         </Form>
       </div>
-      <div className="relative flex flex-col items-center justify-center">
-        <div className="relative grid w-full grid-cols-2 md:grid-cols-3 gap-2.5">
+      <div className="relative flex flex-col items-center justify-center mt-3">
+        <div className="relative grid w-full grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3 gap-1.5 md:gap-2.5">
           {loading ? (
             <>
               {[...Array(3)].map((_, index) => (
-                <Skeleton key={index} className="min-w-full rounded h-80 m-0.5 shrink" />
+                <Skeleton key={index} className="min-w-full rounded h-80 shrink" />
               ))}
             </>
           ) : (
-            data && (
+            data !== null && (
               <>
                 <UnsplashGrid data={data.slice(0, Math.ceil(data.length / 3))} />
                 <UnsplashGrid

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { z } from 'zod';
 import { UnsplashImage } from '@/app/models/unsplash-image';
@@ -12,26 +12,24 @@ const useImageSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const searchImage = async (e: z.infer<typeof formSchema>) => {
+  const searchImage = useCallback(async (e: z.infer<typeof formSchema>) => {
     try {
       const query = e.query;
       formSchema.parse({ query });
 
       if (query) {
-        setData(null);
         setError(false);
         setLoading(true);
         const res = await axios.get(`/api/search?query=${query}`);
         const images: UnsplashImage[] = await res.data;
         setData(images);
-        console.log(data);
       }
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return { data, loading, error, searchImage };
 };
