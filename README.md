@@ -20,7 +20,9 @@ To run the project locally, follow these steps:
 3. Obtain an access key from the Unsplash API by creating an account at [https://unsplash.com/developers](https://unsplash.com/developers).
 4. Create a `.env.local` file in the root directory of the project and add your Unsplash API access key:
    ```
-   NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_access_key_here
+   UNSPLASH_ACCESS_KEY=your_access_key_here
+
+   ## not need NEXT_PUBLIC_ , because using in server not client
    ```
 5. Start the development server by running `npm run dev` or `yarn dev`.
 6. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the application.
