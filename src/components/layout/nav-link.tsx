@@ -25,8 +25,8 @@ const NavLink = () => {
         <li key={nav.link}>
           <Link
             className={cn(
-              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex justify-center transition-colors hover:text-slate-300/80 text-slate-300/60',
-              pathname && baseRoute === nav.link ? 'text-sky-600' : ''
+              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex justify-center transition-colors hover:text-acc/80 text-prim/60',
+              pathname && baseRoute === nav.link ? 'text-prim' : ''
             )}
             href={nav.link}
           >

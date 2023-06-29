@@ -31,20 +31,22 @@ export const NavMenu = () => {
   return (
     <div>
       <div className="space-y-1">
-        <h4 className="text-sm font-medium leading-none">Fetching data</h4>
-        <p className="text-sm text-muted-foreground">Choose different fetching strategy.</p>
+        <h4 className="text-sm font-medium text-prim leading-none">Fetching data</h4>
+        <p className="text-sm text-text">Choose different fetching strategy.</p>
       </div>
-      <Separator className="my-4" />
-      <div className="flex items-center h-5 space-x-4 text-sm">
+      <Separator className="my-4 bg-prim" />
+      <div className="flex items-center justify-center h-5 space-x-4 text-sm">
         {components.map((component, index) => (
           <React.Fragment key={component.title}>
             <Link
-              className={cn(pathname && baseRoute === component.href ? 'text-sky-600' : '')}
+              className={cn(pathname && baseRoute === component.href ? 'text-prim' : 'text-text')}
               href={component.href}
             >
               {component.title}
             </Link>
-            {index !== components.length - 1 && <Separator orientation="vertical" />}
+            {index !== components.length - 1 && (
+              <Separator className="bg-prim" orientation="vertical" />
+            )}
           </React.Fragment>
         ))}
       </div>

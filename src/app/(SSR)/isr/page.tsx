@@ -22,10 +22,10 @@ export default async function Page() {
   const width = Math.min(500, image.width);
   const height = (width / image.width) * image.height;
   return (
-    <div className="flex flex-col items-center justify-normal min-h-sekrin">
+    <div className="flex flex-col items-center justify-normal">
       <div className="flex flex-col items-center max-w-5xl gap-3 py-4">
         <NavMenu />
-        <p className="text-blue-500 hover:underline">
+        <p className="text-acc/80 hover:underline">
           by&nbsp;
           <Link href={`/user/${image.user.username}`}>{image.user.username}</Link>
         </p>

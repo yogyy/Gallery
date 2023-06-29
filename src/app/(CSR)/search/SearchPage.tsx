@@ -70,34 +70,32 @@ export default function SearchPage() {
               name="query"
               render={({ field }) => (
                 <FormItem className="w-4/6">
-                  <FormLabel className="w-full font-semibold text-slate-400">
-                    Search Image
-                  </FormLabel>
+                  <FormLabel className="w-full font-semibold text-prim">Search Image</FormLabel>
                   <FormControl ref={inputRef}>
                     <Input
-                      className="focus-visible:shadow-neon"
+                      className="focus-visible:shadow-neon placeholder:text-acc/60 focus-visible:ring-offset-0 focus-visible:ring-prim/90 focus-visible:border-prim"
                       disabled={loading}
                       placeholder="query ... "
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-prim">
                     Your search results will appear below.
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-acc" />
                 </FormItem>
               )}
             />
             <Button
               variant="outline"
               type="submit"
-              className="w-[70px] hover:bg-foreground hover:text-white active:shadow-neon"
+              className="w-[70px] focus-visible:shadow-neon focus-visible:ring-offset-0 focus-visible:ring-prim/90 focus-visible:border-prim hover:bg-background/10"
               disabled={loading}
             >
               {loading ? (
                 <AiOutlineLoading3Quarters className="w-4 animate-spin" />
               ) : (
-                <kbd className="pointer-events-none bg-transparent inline-flex border-none h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium text-white opacity-100">
+                <kbd className="pointer-events-none bg-transparent inline-flex border-none h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium text-acc/60 opacity-100">
                   <span className="text-xs">⌘</span>K
                 </kbd>
               )}
@@ -106,30 +104,23 @@ export default function SearchPage() {
         </Form>
       </div>
       <div className="relative flex flex-col items-center justify-center mt-3">
-        <div className="relative grid w-full grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3 gap-1.5 md:gap-2.5">
+        <div className="relative grid w-full grid-cols-1 auto-rows-fr min-[360px]:grid-cols-2 min-[580px]:grid-cols-3 gap-1.5 md:gap-2.5">
           {loading ? (
             <>
               {[...Array(3)].map((_, index) => (
-                <Skeleton
-                  key={index}
-                  className="min-w-full rounded h-80 shrink"
-                />
+                <Skeleton key={index} className="min-w-full rounded h-80 shrink" />
               ))}
             </>
           ) : (
             data !== null && (
               <>
+                <UnsplashGrid data={data.slice(0, Math.ceil(data.length / 3))} />
                 <UnsplashGrid
-                  data={data.slice(0, Math.ceil(data.length / 3))}
-                />
-                <UnsplashGrid
-                  data={data.slice(
-                    Math.ceil(data.length / 3),
-                    Math.ceil((2 * data.length) / 3)
-                  )}
+                  data={data.slice(Math.ceil(data.length / 3), Math.ceil((2 * data.length) / 3))}
                 />
                 <UnsplashGrid
                   data={data.slice(Math.ceil((2 * data.length) / 3))}
+                  className="min-[360px]:col-span-2 min-[580px]:col-span-1"
                 />
               </>
             )
