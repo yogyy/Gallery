@@ -15,15 +15,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { NextImage } from '@/components/client/NextImage';
-import Link from 'next/link';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useImageSearch, formSchema } from '@/hooks/use-search';
-import UnsplashGrid from '@/components/client/unsplash-grid';
+import { ResultGrid2, ResultGrid3 } from './ResultPage';
+import { useSearchContext } from '@/app/context/context';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { useIsMounted } from '@/hooks/is-mounted';
 
 export default function SearchPage() {
-  const { data, loading, error, searchImage } = useImageSearch();
+  const { loading, error, searchImage } = useImageSearch();
+  const { datas: data } = useSearchContext();
+  const matches = useMediaQuery('(min-width: 768px)');
+  const isMounted = useIsMounted();
 
   const inputRef = React.useRef<HTMLElement>(null);
 
@@ -39,10 +42,6 @@ export default function SearchPage() {
       inputRef.current.focus();
     }
   };
-
-  React.useEffect(() => {
-    console.log('function jalan lagi');
-  }, [searchImage]);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -71,18 +70,19 @@ export default function SearchPage() {
               render={({ field }) => (
                 <FormItem className="w-4/6">
                   <FormLabel className="w-full font-semibold text-prim">Search Image</FormLabel>
-                  <FormControl ref={inputRef}>
+                  <FormControl className="select-all" ref={inputRef}>
                     <Input
+                      type="text"
                       className="focus-visible:shadow-neon placeholder:text-acc/60 focus-visible:ring-offset-0 focus-visible:ring-prim/90 focus-visible:border-prim"
                       disabled={loading}
                       placeholder="query ... "
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="text-prim">
+                  <FormDescription className="select-all text-prim">
                     Your search results will appear below.
                   </FormDescription>
-                  <FormMessage className="text-acc" />
+                  <FormMessage className="flex items-center justify-center w-full font-semibold text-red-300 underline decoration-prim" />
                 </FormItem>
               )}
             />
@@ -104,30 +104,17 @@ export default function SearchPage() {
         </Form>
       </div>
       <div className="relative flex flex-col items-center justify-center mt-3">
-        <div className="relative grid w-full grid-cols-1 auto-rows-fr min-[360px]:grid-cols-2 min-[580px]:grid-cols-3 gap-1.5 md:gap-2.5">
-          {loading ? (
-            <>
-              {[...Array(3)].map((_, index) => (
-                <Skeleton key={index} className="min-w-full rounded h-80 shrink" />
-              ))}
-            </>
-          ) : (
-            data !== null && (
-              <>
-                <UnsplashGrid data={data.slice(0, Math.ceil(data.length / 3))} />
-                <UnsplashGrid
-                  data={data.slice(Math.ceil(data.length / 3), Math.ceil((2 * data.length) / 3))}
-                />
-                <UnsplashGrid
-                  data={data.slice(Math.ceil((2 * data.length) / 3))}
-                  className="min-[360px]:col-span-2 min-[580px]:col-span-1"
-                />
-              </>
-            )
-          )}
-          {error && <p>someting error</p>}
-          {data?.length === 0 && <p>nothing found, {error}</p>}
-        </div>
+        {isMounted() && matches ? (
+          <ResultGrid3 loading={loading} key="grid3" />
+        ) : (
+          <ResultGrid2 loading={loading} key="grid2" />
+        )}
+        {error && (
+          <p className="font-semibold text-red-300 underline decoration-prim">someting error</p>
+        )}
+        {data?.length === 0 && (
+          <p className="font-semibold text-red-300 underline decoration-prim">nothing found</p>
+        )}
       </div>
     </div>
   );
