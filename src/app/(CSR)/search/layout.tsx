@@ -1,9 +1,6 @@
-'use client';
+import { SearchContextProvider } from '@/app/context/context';
+import * as React from 'react';
 
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-
-const queryClient = new QueryClient();
-
-export default async function QueryLayout({ children }: { children: React.ReactNode }) {
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+export default async function SearchLayout({ children }: { children: React.ReactNode }) {
+  return <SearchContextProvider>{children}</SearchContextProvider>;
 }
