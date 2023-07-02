@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: #121212;
@@ -11,6 +11,7 @@
 ::-webkit-scrollbar-thumb {
   --tw-bg-opacity: 1;
   background-color: rgb(240 115 5 / var(--tw-bg-opacity));
+  border-radius: 0.25rem;
 }
 
 @layer base {
@@ -83,13 +84,8 @@
   body {
     @apply text-text;
     color-scheme: dark;
-    background: #f12711; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #f12711,
-      #f5af19
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #f12711, #f5af19);
+    background-image: url('https://utfs.io/f/5c2d8ffd-7f05-4c85-8534-53da0c9e656f_asuka.jpg');
+    background-color: #121212; /* fallback for old browsers */
   }
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -98,7 +94,7 @@
     transition: background-color 5000s ease-in-out 0s;
   }
   a:focus-visible {
-    @apply ring-offset-0 border-none outline-none;
+    @apply border-none outline-none ring-offset-0;
   }
 }
 
@@ -109,6 +105,12 @@
   .anchorfooter:focus-visible,
   .anchorfooter:hover,
   .anchorfooter:active {
-    @apply decoration-acc underline-offset-8 text-acc transition-all duration-300 ease-out;
+    @apply transition-colors duration-300 ease-linear decoration-acc text-acc;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url('https://utfs.io/f/6a7b677d-a46b-4ba3-8450-589a30b71c42_more%20asuka.jpg');
   }
 }

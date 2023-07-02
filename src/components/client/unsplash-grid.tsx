@@ -13,13 +13,13 @@ type UnsplashGridType = {
 export default function UnsplashGrid({ data, className }: UnsplashGridType) {
   return (
     <div className={cn('grid grid-cols-1 gap-y-1.5 md:gap-y-2.5', className)}>
-      {data?.map((image: UnsplashImage) => (
+      {data?.map(image => (
         <Link
           prefetch={false}
           key={image.alt_description + image.height}
           href={`/user/${image.user.username}`}
           aria-label={image.alt_description}
-          className="relative w-auto h-auto overflow-hidden rounded"
+          className="relative w-full h-full overflow-hidden rounded"
         >
           <NextImage
             src={image.urls.regular}
