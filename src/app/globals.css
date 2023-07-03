@@ -84,7 +84,6 @@
   body {
     @apply text-text;
     color-scheme: dark;
-    background-image: url('https://utfs.io/f/5c2d8ffd-7f05-4c85-8534-53da0c9e656f_asuka.jpg');
     background-color: #121212; /* fallback for old browsers */
   }
   input:-webkit-autofill,
@@ -95,6 +94,9 @@
   }
   a:focus-visible {
     @apply border-none outline-none ring-offset-0;
+  }
+  .bg-asuka {
+    background-image: url('https://utfs.io/f/5c2d8ffd-7f05-4c85-8534-53da0c9e656f_asuka.jpg');
   }
 }
 
@@ -110,7 +112,7 @@
 }
 
 @media (min-width: 768px) {
-  body {
+  .bg-asuka {
     background-image: url('https://utfs.io/f/6a7b677d-a46b-4ba3-8450-589a30b71c42_more%20asuka.jpg');
   }
 }

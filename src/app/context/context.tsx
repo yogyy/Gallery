@@ -13,10 +13,13 @@ export const SearchContext = React.createContext<SearchContextType | null>(null)
 export const SearchContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [datas, setDatas] = React.useState<UnsplashImage[] | null>(null);
 
-  const value = {
-    datas,
-    setDatas,
-  };
+  const value = React.useMemo(
+    () => ({
+      datas,
+      setDatas,
+    }),
+    [datas]
+  );
 
   return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;
 };

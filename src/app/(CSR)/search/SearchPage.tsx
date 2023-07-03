@@ -21,6 +21,7 @@ import { ResultGrid2, ResultGrid3 } from './ResultPage';
 import { useSearchContext } from '@/app/context/context';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useIsMounted } from '@/hooks/is-mounted';
+import Settings from '@/components/client/settings';
 
 export default function SearchPage() {
   const { loading, error, searchImage } = useImageSearch();
@@ -57,7 +58,7 @@ export default function SearchPage() {
   }, []);
 
   return (
-    <div className="w-full h-auto max-w-5xl mx-3 lg:mx-0">
+    <div className="w-full h-full max-w-5xl mx-3 lg:mx-0">
       <div className="w-auto">
         <Form {...form}>
           <form
@@ -70,7 +71,7 @@ export default function SearchPage() {
               render={({ field }) => (
                 <FormItem className="w-4/6">
                   <FormLabel className="w-full font-semibold text-prim">Search Image</FormLabel>
-                  <FormControl className="select-all" ref={inputRef}>
+                  <FormControl ref={inputRef}>
                     <Input
                       type="text"
                       className="focus-visible:shadow-neon placeholder:text-acc/60 focus-visible:ring-offset-0 focus-visible:ring-prim/90 focus-visible:border-prim"
@@ -79,7 +80,7 @@ export default function SearchPage() {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="select-all text-prim">
+                  <FormDescription className="text-prim">
                     Your search results will appear below.
                   </FormDescription>
                   <FormMessage className="flex items-center justify-center w-full font-semibold text-red-300 underline decoration-prim" />
