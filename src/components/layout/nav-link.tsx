@@ -14,11 +14,16 @@ export const navbar = [
     name: 'Search',
     link: '/search',
   },
+  {
+    name: 'Upload',
+    link: '/upload',
+  },
 ];
 const NavLink = () => {
   const pathname = usePathname();
   const arrsplit = pathname!.split('/');
   const baseRoute = '/' + arrsplit[1];
+
   return (
     <ul className={'items-center flex-grow hidden sm:flex'}>
       {navbar.map(nav => (
@@ -47,8 +52,8 @@ const SideNavLink = () => {
         <li key={nav.link}>
           <SheetClose
             className={cn(
-              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex hover:text-green-800',
-              pathname === nav.link ? 'text-green-600' : ''
+              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex transition-colors hover:text-acc/80 text-prim/6',
+              pathname === nav.link ? 'text-prim' : ''
             )}
             onClick={() => r.push(nav.link)}
           >
