@@ -18,19 +18,18 @@ export function SheetDemo() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="link" className="text-white">
+        <Button variant="link" className="px-2">
           <HiMiniBars3 />
         </Button>
       </SheetTrigger>
       <SheetContent
         position="left"
         size="xl"
-        className="flex flex-col items-start text-white border-none bg-foreground sm:hidden"
+        className="flex flex-col items-start border-none bg-bg sm:hidden"
       >
         <SheetHeader>
-          <SheetTitle className="flex w-full text-base text-white">
-            <HiMiniBars3CenterLeft className="mx-2.5" />{' '}
-            <span className="text-green-600">Gallery</span>
+          <SheetTitle className="flex w-full text-base text-acc">
+            <HiMiniBars3CenterLeft className="mx-2.5" /> <span className="text-acc">Gallery</span>
           </SheetTitle>
           <hr />
         </SheetHeader>

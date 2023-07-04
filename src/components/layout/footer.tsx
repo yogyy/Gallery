@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="py-6 border-t md:px-8 md:py-0 h-[98px] bg-bg/80 backdrop-blur">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-        <p className="text-sm leading-loose text-center md:text-left text-prim/70 tai">
+        <p className="text-sm leading-loose text-center md:text-left text-prim/70">
           Built by{' '}
           <Link
             href="https://twitter.com/yogyxx"
@@ -22,7 +22,7 @@ export default function Footer() {
             rel="noreferrer"
             className="anchorfooter"
           >
-            GitHub
+            Github
           </Link>
           .
         </p>

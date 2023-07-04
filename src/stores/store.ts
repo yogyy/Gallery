@@ -5,7 +5,7 @@ type Store = {
   inc: () => void;
 };
 
-export const useStore = create<Store>()(set => ({
+const useStore = create<Store>()(set => ({
   count: 1,
   inc: () => set(state => ({ count: state.count + 1 })),
 }));
@@ -15,7 +15,34 @@ type Bg = {
   changeBg: () => void;
 };
 
-export const useBg = create<Bg>(set => ({
+const useBg = create<Bg>(set => ({
   use: false,
   changeBg: () => set(state => ({ use: !state.use })),
 }));
+
+type Bio = {
+  human: {
+    name: string;
+    age: number;
+    gender?: 'male' | 'female';
+    hobbies: string[];
+  };
+  updateHuman: (data: Partial<Bio['human']>) => void;
+};
+
+const useBioStore = create<Bio>(set => ({
+  human: {
+    name: 'John Doe',
+    age: 25,
+    hobbies: ['reading', 'painting'],
+  },
+  updateHuman: data =>
+    set(state => ({
+      human: {
+        ...state.human,
+        ...data,
+      },
+    })),
+}));
+
+export { useStore, useBg, useBioStore };

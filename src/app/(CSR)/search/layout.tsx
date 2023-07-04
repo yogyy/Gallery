@@ -1,3 +1,5 @@
+'use client';
+
 import { SearchContextProvider } from '@/app/context/context';
 import * as React from 'react';
 

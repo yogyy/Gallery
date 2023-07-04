@@ -96,7 +96,8 @@
     @apply border-none outline-none ring-offset-0;
   }
   .bg-asuka {
-    background-image: url('https://utfs.io/f/5c2d8ffd-7f05-4c85-8534-53da0c9e656f_asuka.jpg');
+    background-image: url('https://uploadthing.com/f/2c6c1451-f640-4641-bb17-6fe15671c7fe_asuka%20portrait.jpg');
+    background-position: fixed;
   }
 }
 

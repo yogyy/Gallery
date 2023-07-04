@@ -1,6 +1,7 @@
 import { NavLink } from '@/components/layout/nav-link';
 import { SheetDemo } from '../components/layout/hamburger';
 import Link from 'next/link';
+import Settings from '@/components/client/settings';
 
 export default async function Navbar() {
   return (
@@ -15,6 +16,7 @@ export default async function Navbar() {
         <div className="flex items-center justify-center w-full h-full max-w-5xl py-2">
           <NavLink />
         </div>
+        <Settings />
       </nav>
     </header>
   );

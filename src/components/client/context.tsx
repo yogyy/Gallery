@@ -1,5 +1,8 @@
 'use client';
 
+import { cn } from '@/lib/utils';
+import { useBg } from '@/stores/store';
+
 import * as React from 'react';
 
 interface IMenuContext {
@@ -14,7 +17,15 @@ export const MyContext = React.createContext<IMenuContext>({
 
 export const MyContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = React.useState('dadad');
-  return <MyContext.Provider value={{ data, setData }}>{children}</MyContext.Provider>;
+  const { use } = useBg();
+
+  return (
+    <MyContext.Provider value={{ data, setData }}>
+      <div className={cn('relative h-full w-full bg-fixed bg-center bg-cover', use && 'bg-asuka ')}>
+        {children}
+      </div>
+    </MyContext.Provider>
+  );
 };
 
 export const useThemeContext = () => React.useContext(MyContext);
