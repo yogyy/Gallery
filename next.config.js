@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'plus.unsplash.com', 'unsplash.com'],
+    unoptimized: true,
   },
 };
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
